@@ -8,8 +8,7 @@ export function QuoteBox(props) {
           <QuoteBoxContent text={props.quote.text} author={props.quote.author} color={props.color}/>
         <div id="buttons" className="transition-ease">
           <div id="social-buttons">
-            <Button key="twitter-button" value={<Icon key="twitter-icon" value="fa-twitter"/>} color={props.color}/>
-            <Button key="tumblr-button" value={<Icon key="tumblr-icon" value="fa-tumblr"/>} color={props.color}/>
+            <Button target="_blank" href={encodeURI(`https://twitter.com/intent/tweet?text="${props.quote.text}" ${props.quote.author}&hashtags=quotes`)} id="tweet-quote" value={<Icon key="twitter-icon" value="fa-twitter"/>} color={props.color}/>
           </div>
           <div>
             <Button callback={props.handleChange} key="new-quote-button" id="new-quote" value="New quote" color={props.color}/>
@@ -18,3 +17,5 @@ export function QuoteBox(props) {
       </div>
     );
 }
+
+//`https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes&caption=${props.quote.author}&content=${props.quote.text}&shareSource=tumblr_share_button`

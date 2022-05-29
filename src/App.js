@@ -6,6 +6,16 @@ let styles = {
   backgroundColor: 'blue'
 }
 
+const getRandomRGBColor = () => {
+  let r = Math.floor(Math.random() * 255);
+  let g = Math.floor(Math.random() * 255);
+  let b = Math.floor(Math.random() * 255);
+  let color = `rgb(${r}, ${g}, ${b})`;
+  return color;
+}
+
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -14,20 +24,17 @@ class App extends React.Component {
         text: 'Better be ignorant of a matter than half know it.',
         author: 'Publilius Syrus'
       },
-      color: 'grey'
+      color: 'grey',
+      tweetURL: ''
     }
     this.handleChange = this.handleChange.bind(this);
   }
+
   async handleChange(event) {
     let quotes = await this.fetchQuotes();
-    let r = Math.floor(Math.random() * 255);
-    let g = Math.floor(Math.random() * 255);
-    let b = Math.floor(Math.random() * 255);
-    let color = `rgb(${r}, ${g}, ${b})`;
-    
     this.setState({
       quote : quotes[Math.floor(Math.random() * quotes.length)],
-      color: color
+      color: getRandomRGBColor()
     })
   }
   async fetchQuotes() {
@@ -46,7 +53,6 @@ class App extends React.Component {
           <QuoteBox color={this.state.color} quote={this.state.quote} handleChange={this.handleChange}/>
           <span id="page-author"> By <a href="https://jacobrowland.me">Jacob Rowland</a></span>
         </div>
-        
       </main>
     </div>
     );
